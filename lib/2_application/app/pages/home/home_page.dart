@@ -3,11 +3,19 @@ import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_app/2_application/app/pages/dashboard/dashboard_page.dart';
 import 'package:todo_app/2_application/app/pages/overview/overview_page.dart';
+import 'package:todo_app/2_application/app/pages/task/tasks_page.dart';
 
 class HomePage extends StatefulWidget {
-  static final tabs = [DashboardPage.pageConfig, OverviewPage.pageConfig];
+  //list of all tabs that should be displayed in out navigation bar.
+  static final tabs = [
+    DashboardPage.pageConfig,
+    OverviewPage.pageConfig,
+    TasksPage.pageConfig,
+  ];
   HomePage({super.key, required String tab})
-    : index = tabs.indexWhere((element) => element.name == tab);
+    : index = tabs.indexWhere(
+        (element) => element.name == tab,
+      ); // colon content signify initializer before constructor executes. everything after the colon runs before the constructor body.
 
   final int index;
 
@@ -39,6 +47,7 @@ class _HomePageState extends State<HomePage> {
                             AdaptiveScaffold.toRailDestination(element),
                       )
                       .toList(),
+
                   selectedIndex: widget.index,
                   onDestinationSelected: (index) =>
                       _tapOnNavigationDestination(context, index),
